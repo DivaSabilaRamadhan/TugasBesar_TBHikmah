@@ -5,8 +5,10 @@
  */
 package TugasBesar_View;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -98,14 +100,13 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         txtNip = new javax.swing.JTextField();
         txtNamaKaryawan = new javax.swing.JTextField();
         cbPosisi = new javax.swing.JComboBox<>();
-        rbLaki = new javax.swing.JRadioButton();
-        rbPerempuan = new javax.swing.JRadioButton();
         txtNoTelepon = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAlamat = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelKaryawan = new javax.swing.JTable();
+        cbJenis = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Daftar_Karyawan");
@@ -128,6 +129,11 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         });
 
         jButton4.setText("Delete");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("NIP :");
 
@@ -142,16 +148,15 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         jLabel6.setText("Telepon :");
 
         cbPosisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasir", "Gudang", "Supir" }));
-
-        rbLaki.setSelected(true);
-        rbLaki.setText("Laki-Laki");
-
-        rbPerempuan.setText("Perempuan");
+        cbPosisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPosisiActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
         jLabel7.setText("DAFTAR KARYAWAN");
 
-        taAlamat.setEditable(false);
         taAlamat.setColumns(20);
         taAlamat.setRows(5);
         jScrollPane1.setViewportView(taAlamat);
@@ -168,6 +173,13 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(TabelKaryawan);
+
+        cbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-Laki", "Perempuan" }));
+        cbJenis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbJenisActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,13 +200,13 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbPerempuan)
-                            .addComponent(rbLaki)
                             .addComponent(txtNoTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbPosisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNamaKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNip, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNamaKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbPosisi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbJenis, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(61, Short.MAX_VALUE)
@@ -223,17 +235,15 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNamaKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbPosisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbPosisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(rbLaki))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbPerempuan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cbJenis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtNoTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -268,7 +278,23 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String posisi = null;
         String jenis_kelamin = null;
+        //Validasi Posisi
+        if (cbPosisi.getSelectedIndex()== 0) {
+            posisi = "Kasir";
+        } else if (cbPosisi.getSelectedIndex() == 1) {
+            posisi = "Gudang";
+        } else if (cbPosisi.getSelectedIndex() == 2) {
+            posisi = "Supir";
+        }
+        
+        //Validasi Jenis Kelamin
+        if (cbJenis.getSelectedIndex() == 0) {
+            jenis_kelamin = "Laki-Laki";
+        } else if (cbJenis.getSelectedIndex() == 1) {
+            jenis_kelamin = "Perempuan";
+        }
         //Validasi apabila ada data yang kosong
         if (txtNip.getText().equals("")) {
             if (txtNamaKaryawan.getText().equals("")) {
@@ -278,17 +304,11 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
                     }
                 }
             } 
-        }
-        
-        if (rbLaki.isSelected()) {
-            jenis_kelamin = "Laki-Laki";
-        }else if (rbPerempuan.isSelected()) {
-            jenis_kelamin = "Perempuan";
-        }
+        } else
         //Menambahkan Data
         try {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/dblogin","root","");
-            cn.createStatement().execute("insert into tbkaryawan values" + "('"+txtNip.getText()+"','"+txtNamaKaryawan.getText()+"','"+cbPosisi.getSelectedIndex()+"','"+jenis_kelamin+"', '"+txtNoTelepon.getText()+"', '"+taAlamat.getText()+"')");
+            cn.createStatement().execute("insert into tbkaryawan values" + "('"+txtNip.getText()+"','"+txtNamaKaryawan.getText()+"','"+posisi+"','"+jenis_kelamin+"', '"+txtNoTelepon.getText()+"', '"+taAlamat.getText()+"')");
             JOptionPane.showMessageDialog(null, "Data Karyawan berhasil ditambahkan");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Data gagal ditambahkan");
@@ -302,6 +322,31 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         txtNoTelepon.setText("");
         taAlamat.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cbJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbJenisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbJenisActionPerformed
+
+    private void cbPosisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPosisiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPosisiActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int i = TabelKaryawan.getSelectedRow();
+        String nip = tabel.getValueAt(i, 0).toString();
+        String sql = "DELETE FROM `tbkaryawan` WHERE `tbkaryawan`.`nip` = '" + nip +"' ";
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/dblogin","root","");
+            PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
+        }catch(SQLException | HeadlessException e){
+            JOptionPane.showMessageDialog(null, "Data Gagal Dihapus!");
+        }finally {
+            tampilData();
+    }                                         
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +385,7 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelKaryawan;
+    private javax.swing.JComboBox<String> cbJenis;
     private javax.swing.JComboBox<String> cbPosisi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -355,8 +401,6 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JRadioButton rbLaki;
-    private javax.swing.JRadioButton rbPerempuan;
     private javax.swing.JTextArea taAlamat;
     private javax.swing.JTextField txtNamaKaryawan;
     private javax.swing.JTextField txtNip;
