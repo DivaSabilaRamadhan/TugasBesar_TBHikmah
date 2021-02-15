@@ -211,7 +211,7 @@ public class MainView extends javax.swing.JFrame {
             rs = stat.executeQuery(sql);
         if(rs.next()){
         if(txtUsername.getText().equals(rs.getString("username")) && txtPassword.getText().equals(rs.getString("password"))){
-            JOptionPane.showMessageDialog(null, "berhasil login");
+            JOptionPane.showMessageDialog(null, "Login berhasil, Selamat Datang!");
             
             // pindah ke panel MenuView
             MenuView login = new MenuView();
