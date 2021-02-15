@@ -111,6 +111,7 @@ public class ViewDaftarUser extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelUser = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daftar_User");
@@ -171,6 +172,13 @@ public class ViewDaftarUser extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelUser);
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
@@ -211,7 +219,10 @@ public class ViewDaftarUser extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnReset)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete)))
+                        .addComponent(btnDelete))
+                    .addGroup(bodyPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         bodyPanelLayout.setVerticalGroup(
@@ -247,7 +258,9 @@ public class ViewDaftarUser extends javax.swing.JFrame {
                     .addComponent(btnReset)
                     .addComponent(btnRefresh)
                     .addComponent(btnAdd))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,6 +334,13 @@ public class ViewDaftarUser extends javax.swing.JFrame {
             tampilData();
     }//GEN-LAST:event_btnDeleteActionPerformed
     }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MenuView back = new MenuView();
+        back.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+      
     /**
      * @param args the command line arguments
      */
@@ -368,6 +388,7 @@ public class ViewDaftarUser extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtEmail;
