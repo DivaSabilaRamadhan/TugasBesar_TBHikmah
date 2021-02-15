@@ -449,11 +449,14 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
     private void btnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarActionPerformed
         // TODO add your handling code here:
         int total_bayar, uang, kembalian;
-        JOptionPane.showMessageDialog(null, "Terima kasih atas kunjungannya");
+        
         total_bayar = Integer.parseInt(txtTotalBayar.getText());
         if (txtUang.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Masukan nominal uang");
         } else {
+        
+        JOptionPane.showMessageDialog(null, "Terima kasih atas kunjungannya");
+            
         uang = Integer.parseInt(txtUang.getText());
         
         kembalian = uang - total_bayar;
