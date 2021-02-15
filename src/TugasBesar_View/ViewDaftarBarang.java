@@ -306,7 +306,7 @@ public class ViewDaftarBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
         MenuView back = new MenuView();
         back.setVisible(true);
-        back.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void TabelBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelBarangMouseClicked

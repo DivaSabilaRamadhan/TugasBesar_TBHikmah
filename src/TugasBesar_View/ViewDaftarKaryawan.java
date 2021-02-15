@@ -102,13 +102,13 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         txtNip = new javax.swing.JTextField();
         txtNamaKaryawan = new javax.swing.JTextField();
         cbPosisi = new javax.swing.JComboBox<>();
+        cbJenis = new javax.swing.JComboBox<>();
         txtNoTelepon = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAlamat = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelKaryawan = new javax.swing.JTable();
-        cbJenis = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daftar_Karyawan");
@@ -122,6 +122,11 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         });
 
         jButton2.setText("Refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Reset");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +168,13 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
             }
         });
 
+        cbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-Laki", "Perempuan" }));
+        cbJenis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbJenisActionPerformed(evt);
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
         jLabel7.setText("DAFTAR KARYAWAN");
 
@@ -187,13 +199,6 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(TabelKaryawan);
-
-        cbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-Laki", "Perempuan" }));
-        cbJenis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbJenisActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -299,23 +304,24 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String posisi = null;
-        String jenis_kelamin = null;
+        String posisi = cbPosisi.getSelectedItem().toString();
+        String jenis_kelamin = cbJenis.getSelectedItem().toString();
         //Validasi Posisi
-        if (cbPosisi.getSelectedIndex()== 0) {
-            posisi = "Kasir";
-        } else if (cbPosisi.getSelectedIndex() == 1) {
-            posisi = "Gudang";
-        } else if (cbPosisi.getSelectedIndex() == 2) {
-            posisi = "Supir";
-        }
         
-        //Validasi Jenis Kelamin
-        if (cbJenis.getSelectedIndex() == 0) {
-            jenis_kelamin = "Laki-Laki";
-        } else if (cbJenis.getSelectedIndex() == 1) {
-            jenis_kelamin = "Perempuan";
-        }
+//        if (cbPosisi.getSelectedItem().equals("Kasir")) {
+//            posisi = "Kasir";
+//        } else if (cbPosisi.getSelectedItem().equals("Gudang")) {
+//            posisi = "Gudang";
+//        } else if (cbPosisi.getSelectedItem().equals("Supir")) {
+//            posisi = "Supir";
+//        }
+//        
+//        //Validasi Jenis Kelamin
+//        if (cbJenis.getSelectedItem().equals("Laki-Laki")) {
+//            jenis_kelamin = "Laki-Laki";
+//        } else if (cbJenis.getSelectedItem().equals("Perempuan")) {
+//            jenis_kelamin = "Perempuan";
+//        }
         //Validasi apabila ada data yang kosong
         if (txtNip.getText().equals("")) {
             if (txtNamaKaryawan.getText().equals("")) {
@@ -329,8 +335,9 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         //Menambahkan Data
         try {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/dblogin","root","");
-            cn.createStatement().execute("insert into tbkaryawan values" + "('"+txtNip.getText()+"','"+txtNamaKaryawan.getText()+"','"+posisi+"','"+jenis_kelamin+"', '"+txtNoTelepon.getText()+"', '"+taAlamat.getText()+"')");
+            cn.createStatement().execute("insert into tbkaryawan values" + "('"+txtNip.getText()+"','"+txtNamaKaryawan.getText()+"','"+posisi+"','"+jenis_kelamin+"','"+txtNoTelepon.getText()+"','"+taAlamat.getText()+"' )");
             JOptionPane.showMessageDialog(null, "Data Karyawan berhasil ditambahkan");
+            tampilData();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Data gagal ditambahkan");
         }
@@ -380,6 +387,11 @@ public class ViewDaftarKaryawan extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_TabelKaryawanMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        tampilData();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
