@@ -99,16 +99,17 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtUang = new javax.swing.JTextField();
         txtTotalBayar = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnKeranjang = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        txtKembalian = new javax.swing.JTextField();
         txtTotalHarga = new javax.swing.JTextField();
         btnDeleteKeranjang = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        btnPrint = new javax.swing.JButton();
         btnBayar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtNamaBarang = new javax.swing.JTextField();
@@ -129,7 +130,15 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
+        jLabel5.setText("Uang :");
+
         jLabel8.setText("Kembalian :");
+
+        txtTotalBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalBayarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Total Bayar :");
 
@@ -167,9 +176,12 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
             }
         });
 
-        btnPrint.setText("Print");
-
         btnBayar.setText("Bayar");
+        btnBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBayarActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -229,11 +241,13 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
                 .addGap(113, 113, 113)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtTotalBayar)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                    .addComponent(txtUang, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(txtKembalian))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBayar, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
@@ -277,13 +291,8 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
                 .addGap(155, 155, 155))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(204, 204, 204))))
+                .addComponent(jLabel1)
+                .addGap(204, 204, 204))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,23 +329,22 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtTotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTotalbayar))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBayar))
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtTotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTotalbayar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBayar)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtKembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -424,11 +432,35 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
     }
     private void btnTotalbayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalbayarActionPerformed
         // TODO add your handling code here:
-        int total_bayar = 0, total_harga = 0;
+        int total_bayar = 0;
         
+        for (int i = 0; i < TabelTransaksi.getRowCount(); i++){
+        int total_harga = Integer.parseInt((String)TabelTransaksi.getValueAt(i, 3));
         total_bayar += total_harga;
+        }
+        txtTotalBayar.setText(String.valueOf(total_bayar));
     }//GEN-LAST:event_btnTotalbayarActionPerformed
 
+    private void txtTotalBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalBayarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtTotalBayarActionPerformed
+
+    private void btnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarActionPerformed
+        // TODO add your handling code here:
+        int total_bayar, uang, kembalian;
+        JOptionPane.showMessageDialog(null, "Terima kasih atas kunjungannya");
+        total_bayar = Integer.parseInt(txtTotalBayar.getText());
+        if (txtUang.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukan nominal uang");
+        } else {
+        uang = Integer.parseInt(txtUang.getText());
+        
+        kembalian = uang - total_bayar;
+        
+        txtKembalian.setText(Integer.toString(kembalian));
+    }//GEN-LAST:event_btnBayarActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -470,7 +502,6 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
     private javax.swing.JButton btnCariBarang;
     private javax.swing.JButton btnDeleteKeranjang;
     private javax.swing.JButton btnKeranjang;
-    private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnTotal;
     private javax.swing.JButton btnTotalbayar;
@@ -479,16 +510,18 @@ public class ViewDaftarTransaksi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     public javax.swing.JTextField txtHargaBarang;
     public javax.swing.JTextField txtJumlah;
+    private javax.swing.JTextField txtKembalian;
     public javax.swing.JTextField txtNamaBarang;
     private javax.swing.JTextField txtTotalBayar;
     public javax.swing.JTextField txtTotalHarga;
+    private javax.swing.JTextField txtUang;
     // End of variables declaration//GEN-END:variables
 }
